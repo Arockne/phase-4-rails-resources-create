@@ -16,4 +16,14 @@ class BirdsController < ApplicationController
     end
   end
 
+  def create
+    if params[:bird].empty?
+      render json: { error: "Empty object" }, status: :bad_request
+    else
+      bird = Bird.create(name: params[:name], species: params[:species])
+      render json: bird, status: :created
+    end
+
+  end
+
 end
